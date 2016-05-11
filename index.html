@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <title>Angular Practice</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="app.js"></script>
+
+  <style>
+
+  h1{
+     text-align: center;
+  }
+  </style>
+
+  </head>
+  <body ng-app="todolist">
+    <!-- <h1>不管每個頁面產生都會有這一行</h1> -->
+    <!-- <div ng-view> </div> -->
+
+
+<div class="container">
+   <div class="row">
+        <h1>Simple todolist by AngularJS</h1>
+          <div id="listNameWrap" class="col-md-6 col-md-offset-3">
+            <div ng-controller="ListCtrl as vm">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <form ng-submit="vm.auth(vm.listName)" class="form-inline">
+                          <div class="form-group">
+                            <label for="listname" >ListName:</label>
+                                <input type="text" class="form-control" ng-model="vm.listName"/ placeholder="input the list name">
+                                <!--將input的值綁到model -->
+                                <input type="submit" class="form-control">
+                          </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                      <form ng-submit="vm.addTask(vm.newTaskText)" class="form-inline">
+                        <div class="form-group">
+                          <label for="listname" >AddTask:</label>
+                          <input type="text" class="form-control" ng-model="vm.newTaskText"/ placeholder="try to add a task">
+                           <!--將input的值綁到model -->
+                          <input type="submit" class="form-control">
+                        </div>
+                      </form>
+                    </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-9 col-md-offset-2">
+
+                    <table id="todoList" class="table table-hover">
+                    		<thead>
+                    		<tr><th>任務狀態</th><th>該做的東西有什麼</th><th><button ng-click="vm.getTasks()" class="btn btn-default">Refresh</button></th></tr>
+                    		</thead>
+                    				<tbody>
+                                <tr ng-repeat="task in vm.tasks">
+                                   <td>  <input type="checkbox" ng-model="task.isDone" ng-change="vm.updateTask(task.id,task.isDone)" ></td>
+                                   <td><span ng-bind="task.text"></span></td>
+                                   <td><button ng-click="vm.deleteTask(task.id)" >Delete</button></td>
+                                </tr>
+                    				</tbody>
+                   </table>
+
+                  </div>
+              </div>
+        </div>
+
+   </div>
+</div>
+
+  </body>
+</html>
